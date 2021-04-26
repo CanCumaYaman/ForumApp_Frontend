@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/localStorage';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +22,36 @@ export class LoginComponent implements OnInit {
   
  
   
-
-  constructor() { }
-
+  loginForm:FormGroup;
+  constructor(private authService:AuthService,private formBuilder:FormBuilder,private localStorage:LocalStorageService, private toastrService:ToastrService) { }
+  
   ngOnInit(): void {
+    this.createLoginForm();
+  }
+  createLoginForm(){
+    this.loginForm=this.formBuilder.group({
+      email:["",Validators.required],
+      password:["",Validators.required]
+    })
   }
 loginControl(){
-  console.log("Login oldu");
+if(this.loginForm.valid){
+  let loginModel=Object.assign({},this.loginForm.value);
+  this.authService.loginControl(loginModel).subscribe(response=>{
+    this.toastrService.success(response.message,"Login successfull");
+    this.localStorage.setItem("email",this.loginForm.get("email")?.value);
+    this.localStorage.setItem("token",response.data.token);
+    setTimeout(()=>{
+      window.location.href='';
+    },100)
+  },
+  responseError=>{
+    this.toastrService.error(responseError.error,"Username or password wrong");
+  }
+  )
+} else{
+  this.toastrService.error("Please enter valid form");
+}
+  
 }
 }
