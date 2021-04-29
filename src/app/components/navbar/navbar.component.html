@@ -29,15 +29,15 @@
         <a class="nav-link" routerLink="register" *ngIf="isLoggedIn()==false"><i class="fas fa-user-plus mr-1"></i>Register</a>
       </li>
       <li class="nav-item dropdown" *ngIf="isLoggedIn() && dataLoaded==true">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;" >
-          {{ email }}
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;" >
+          {{ userFullName.firstName + " " + userFullName.lastName }}
          
         </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" routerLink="/user/update">Update User Info</a></li>
-          <li><a class="dropdown-item"  routerLink="/user/update">Change Password</a></li>
-          <li><a class="dropdown-item"  >Logout</a></li>
-        </ul>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/user/update">Update User Info</a>
+          <a class="dropdown-item"  routerLink="/user/update">Change Password</a>
+          <a class="dropdown-item" (click)="logOut()"  >Logout</a>
+        </div>
       </li>
       
     
