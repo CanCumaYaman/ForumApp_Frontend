@@ -31,7 +31,7 @@ logOut(){
   return this.authService.logOut();
 }
 getUserInfo(){
- this.userService.getUserFullName(this.email).subscribe(response=>{
+ this.userService.getUserFullNameByMail(this.email).subscribe(response=>{
 this.userFullName=response.data;
  });
 }

@@ -1,0 +1,56 @@
+
+<div class="container">
+    <div class="question-detail mb-5">
+        <div class="row title">
+        <h3 class="title mt-3">{{question.title}}</h3>
+    </div>
+    <hr>
+    <div class="row ">
+        <div class="col-md-7 text-justify">
+            {{question.body}}
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+           <h4 class="mt-3 mb-3"><span class="badge bg-success" style="width: auto;">{{question.topic}}</span></h4> 
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            
+            <span class="d-flex justify-content-end">{{userDto.firstName + " " + userDto.lastName}}</span>
+        </div>
+    </div>
+</div>
+<div class="comments">
+    <div *ngFor="let comment of comments" class="row">
+        <div class="col-md-7">
+            <p>{{comment.comment}}</p>
+            <span class="d-flex justify-content-end">{{comment.userId}}</span>
+            <hr>
+        </div>
+        
+    </div>
+    
+</div>
+<div class="newComment mt-5">
+    <div class="row">
+        <div class="col-md-7">
+        <form [formGroup]="commentForm">
+            <div class="form-group green-border-focus">
+    
+                <textarea class="form-control" formControlName="comment"  rows="3"></textarea>
+              </div>
+            <input type="submit" class="btn btn-info w-25 mt-3 mb-3" (click)="addComment()" value="Add">
+        </form>
+    </div>
+    </div>
+
+</div>
+
+</div>
+
+
+

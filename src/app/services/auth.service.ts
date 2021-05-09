@@ -7,6 +7,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 import { TokenModel } from '../models/tokenModel';
 import { LocalStorageService } from './localStorage';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../models/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,9 @@ export class AuthService {
 
   loginControl(login:Login){
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl+"login",login);
+  }
+  register(user:User){
+    return this.httpClient.post<SingleResponseModel<User>>(this.apiUrl+"register",user);
   }
   logOut(){
     this.localStorage.clear();

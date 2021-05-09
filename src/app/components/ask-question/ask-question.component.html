@@ -1,0 +1,25 @@
+
+<header>
+    <h3 class="title mt-3 mb-5">Ask a public question</h3>
+    <div class="row">
+        <div class="col-md-8">
+
+        <form [formGroup]="questionForm">
+
+        
+    <div class="mb-3 form-group">
+        <input type="text" formControlName="title" name="title" class="form-control" placeholder="Question Title">
+    </div>
+    <div class="mb-3 form-group">
+        <textarea class="form-control" formControlName="body" name="body"  placeholder="Question Body"></textarea>
+    </div>
+    <div class="mb-3 form-group">
+        <input type="text" class="form-control" formControlName="topic" name="topic"  placeholder="Topics">
+    </div>
+    <div class="mb-3 form-group">
+        <input type="submit" (click)="addQuestion()" class="btn btn-success" value="Send" placeholder="Topics">
+    </div>
+</form>
+</div>
+</div>
+</header>

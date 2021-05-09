@@ -10,9 +10,13 @@ import { ArticleComponent } from './components/article/article.component';
 import {  NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { AskQuestionComponent } from './components/ask-question/ask-question.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HomeComponent } from './components/home/home.component';
+import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
 
 
 
@@ -24,7 +28,10 @@ import { ToastrModule } from 'ngx-toastr';
     QuestionComponent,
     ArticleComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AskQuestionComponent,
+    HomeComponent,
+    QuestionDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,9 @@ import { ToastrModule } from 'ngx-toastr';
     })
     
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
