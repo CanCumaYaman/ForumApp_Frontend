@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl,Validators,FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CommentDto } from 'src/app/models/commentDto';
 import { Question } from 'src/app/models/question';
 import { QuestionComment } from 'src/app/models/questionComment';
 import { UserFullName } from 'src/app/models/userFullName';
@@ -21,7 +22,7 @@ export class QuestionDetailComponent implements OnInit {
   userDto:UserFullName;
   dataLoaded:false;
   email:string;
-  comments:QuestionComment[];
+  comments:CommentDto[];
   commentingUserId:number;
   questionId:number;
   commentForm:FormGroup;

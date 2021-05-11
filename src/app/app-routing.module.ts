@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ArticleAddComponent } from './components/article-add/article-add.component';
+import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
+import { ArticleComponent } from './components/article/article.component';
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
 import { HomeComponent } from './components/home/home.component';
 
@@ -15,8 +18,10 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"askQuestion",component:AskQuestionComponent,canActivate:[LoginGuard]},
-  {path:"questions/:questionId",component:QuestionDetailComponent}
-
+  {path:"addArticle",component:ArticleAddComponent,canActivate:[LoginGuard]},
+  {path:"questions/:questionId",component:QuestionDetailComponent,canActivate:[LoginGuard]},
+  {path:"articles",component:ArticleComponent},
+  {path:"articles/:articlesId",component:ArticleDetailComponent,canActivate:[LoginGuard]},
 ];
 
 @NgModule({

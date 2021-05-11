@@ -17,6 +17,9 @@ import { AskQuestionComponent } from './components/ask-question/ask-question.com
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { HomeComponent } from './components/home/home.component';
 import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
+import { ArticleAddComponent } from './components/article-add/article-add.component';
+import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
+
 
 
 
@@ -31,7 +34,10 @@ import { QuestionDetailComponent } from './components/question-detail/question-d
     RegisterComponent,
     AskQuestionComponent,
     HomeComponent,
-    QuestionDetailComponent
+    QuestionDetailComponent,
+    ArticleAddComponent,
+    ArticleDetailComponent
+  
   ],
   imports: [
     BrowserModule,

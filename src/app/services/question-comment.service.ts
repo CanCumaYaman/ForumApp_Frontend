@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CommentDto } from '../models/commentDto';
 import { ListResponseModel } from '../models/listResponseModel';
 import { QuestionComment } from '../models/questionComment';
 import { ResponseModel } from '../models/responseModel';
@@ -17,6 +18,6 @@ export class QuestionCommentService {
     return this.httpClient.post<SingleResponseModel<QuestionCommentService>>(this.apiUrl+"add",comment);
   }
   getQuestionCommentsByQuestionId(id:number){
-   return this.httpClient.get<ListResponseModel<QuestionComment>>(this.apiUrl+"getcommentbyid?questionId="+id);
+   return this.httpClient.get<ListResponseModel<CommentDto>>(this.apiUrl+"getcommentbyid?questionId="+id);
   }
 }

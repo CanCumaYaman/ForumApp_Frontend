@@ -2,9 +2,15 @@
 <div class="container">
     <div class="question-detail mb-5">
         <div class="row title">
-        <h3 class="title mt-3">{{question.title}}</h3>
+        <h3 class="title mt-3 ml-3">{{question.title}}</h3>
     </div>
-    <hr>
+    <div class="row ">
+        <div class="col-md-7 ml-0 text-justify">
+            <hr width="100%" color="#202126">
+        </div>
+        
+    </div>
+    
     <div class="row ">
         <div class="col-md-7 text-justify">
             {{question.body}}
@@ -28,7 +34,7 @@
     <div *ngFor="let comment of comments" class="row">
         <div class="col-md-7">
             <p>{{comment.comment}}</p>
-            <span class="d-flex justify-content-end">{{comment.userId}}</span>
+            <span class="d-flex justify-content-end">{{comment.commentingFirstName + " " +  comment.commentingLastName }}</span>
             <hr>
         </div>
         
