@@ -15,7 +15,7 @@ export class QuestionCommentService {
   constructor(private httpClient:HttpClient) { }
 
   addQuestionComment(comment:QuestionComment){
-    return this.httpClient.post<SingleResponseModel<QuestionCommentService>>(this.apiUrl+"add",comment);
+    return this.httpClient.post<SingleResponseModel<QuestionComment>>(this.apiUrl+"add",comment);
   }
   getQuestionCommentsByQuestionId(id:number){
    return this.httpClient.get<ListResponseModel<CommentDto>>(this.apiUrl+"getcommentbyid?questionId="+id);
