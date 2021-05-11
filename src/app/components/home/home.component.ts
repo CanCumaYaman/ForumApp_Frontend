@@ -10,6 +10,7 @@ import { QuestionService } from 'src/app/services/question.service';
 export class HomeComponent implements OnInit {
 
   questions:Question[];
+  filterText:"";
   constructor(private questionService:QuestionService) { }
 
   ngOnInit(): void {

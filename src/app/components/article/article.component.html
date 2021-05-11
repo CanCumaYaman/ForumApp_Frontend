@@ -3,16 +3,20 @@
   </div>
   
   <header class="mt-3">
-  <div *ngFor="let article of articles" class="card text-center mb-3">
-      <div class="card-header">
-        {{article.topic}}
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">{{article.title}}</h5>
+ 
+    <div class="row">
     
-        
-        <a href="#" class="btn btn-primary" routerLink="{{article.id}}">Go details</a>
+       <div *ngFor="let article of articles" class="card col-md-4" style="width: 18rem;border: 0;">
+        <img class="card-img-top" src="https://wallpapercave.com/wp/wp3124749.jpg" style="object-fit:fill;" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{article.topic}}</h5>
+          <p class="card-text">{{article.title}}</p>
+        </div>
+       
+        <div class="card-body">
+          <a href="#" class="btn btn-primary" routerLink="{{article.id}}">Go details</a>
+        </div>
       </div>
-      
-    </div>
+    
+  </div>
   </header>

@@ -4,10 +4,10 @@
     <div class="row">
     <div class="col-md pr-md-5 mb-4 mb-md-0">
     <h3>About Us</h3>
-    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam itaque unde facere repellendus, odio et iste voluptatum aspernatur ratione mollitia tempora eligendi maxime est, blanditiis accusamus. Incidunt, aut, quis!</p>
+    <p class="mb-4">This platform is dedicated to people who are interested in software. You can ask questions about errors you get while writing code or about a topic you are curious about. You can also write article about your knowledge.</p>
     <ul class="list-unstyled quick-info mb-4">
-    <li><a href="#" class="d-flex align-items-center"><i class="fas fa-phone" style="margin-right: 5px;"></i> +1 291 3912 329</a></li>
-    <li><a href="#" class="d-flex align-items-center"><i class="fas fa-envelope" style="margin-right: 5px;"></i> <span class="__cf_email__" data-cfemail="b3daddd5dcf3d4ded2dadf9dd0dcde">[email&#160;protected]</span></a></li>
+    <li><a href="#" class="d-flex align-items-center"><i class="fas fa-phone" style="margin-right: 5px;"></i> +90 541 653 2083</a></li>
+    <li><a href="#" class="d-flex align-items-center"><i class="fas fa-envelope" style="margin-right: 5px;"></i> <span class="__cf_email__" data-cfemail="b3daddd5dcf3d4ded2dadf9dd0dcde">cancumayamann@gmail.com</span></a></li>
     </ul>
     <form action="#" class="subscribe">
     <input type="text" class="form-control" placeholder="Enter your e-mail">
@@ -17,32 +17,22 @@
     <div class="col-md mb-4 mb-md-0">
     <h3>Latest Tweet</h3>
     <ul class="list-unstyled tweets">
-    <li class="d-flex">
-    <div class="mr-4"><i class="fab fa-twitter"></i></div>
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere unde omnis veniam porro excepturi.</div>
+    <li *ngFor="let question of questions | slice:-4" class="d-flex">
+    <div class="mr-4"><i class="fas fa-question"></i></div>
+    <div>{{question.title}}</div>
     </li>
-    <li class="d-flex">
-    <div class="mr-4"><i class="fab fa-twitter"></i></div>
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere unde omnis veniam porro excepturi.</div>
-    </li>
-    <li class="d-flex">
-    <div class="mr-4"><i class="fab fa-twitter"></i></div>
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere unde omnis veniam porro excepturi.</div>
-    </li>
+    
     </ul>
     </div>
-    <div class="col-md-3 mb-4 mb-md-0">
-    <h3>Instagram</h3>
-    <div class="row gallery">
-    <div class="col-6">
-    <a href="#"><img src="../../../assets/Footer/images/img_1.jpg" alt="Image" class="img-fluid"></a>
-    <a href="#"><img src="../../../assets/Footer/images/img_2.jpg" alt="Image" class="img-fluid"></a>
-    </div>
-    <div class="col-6">
-    <a href="#"><img src="../../../assets/Footer/images/img_3.jpg" alt="Image" class="img-fluid"></a>
-    <a href="#"><img src="../../../assets/Footer/images/img_4.jpg" alt="Image" class="img-fluid"></a>
-    </div>
-    </div>
+    <div class="col-md mb-4 mb-md-0">
+    <h3>Latest Articles</h3>
+    <ul class="list-unstyled tweets">
+        <li *ngFor="let question of questions | slice:-4" class="d-flex">
+        <div class="mr-4"><i class="fas fa-newspaper"></i></div>
+        <div>{{question.title}}</div>
+        </li>
+        
+        </ul>
     </div>
     <div class="col-12">
     <div class="py-5 footer-menu-wrap d-md-flex align-items-center">

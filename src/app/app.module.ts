@@ -19,6 +19,7 @@ import { HomeComponent } from './components/home/home.component';
 import { QuestionDetailComponent } from './components/question-detail/question-detail.component';
 import { ArticleAddComponent } from './components/article-add/article-add.component';
 import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
+import { FilterPipePipe } from './pipes/filter.pipe';
 
 
 
@@ -36,7 +37,8 @@ import { ArticleDetailComponent } from './components/article-detail/article-deta
     HomeComponent,
     QuestionDetailComponent,
     ArticleAddComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
+    FilterPipePipe
   
   ],
   imports: [

@@ -2,20 +2,30 @@
   <button class="btn btn-info text-right" routerLink="askQuestion">Ask Question</button>
 </div>
 
-
+<div class="mb-3">
+  <label for="filterText" class="form-label">Search Question</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Search">
+</div>
+<div *ngIf="filterText" class="alert alert-success">
+You searched {{filterText}} 
+</div>
 
 
 <header class="mt-3">
-<div *ngFor="let question of questions" class="card text-center mb-3">
-    <div class="card-header">
-      {{question.topic}}
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{question.title}}</h5>
-  
-      
-      <a href="#" class="btn btn-primary" routerLink="questions/{{question.id}}">Go details</a>
-    </div>
+  <div class="row">
+    
+      <div  *ngFor="let question of questions | filterPipe:filterText" class="card col-md-4" style="width: 18rem;border:0;">
+        <img class="card-img-top" src="https://wallpaperaccess.com/full/1682869.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{question.topic}}</h5>
+          <p class="card-text">{{question.title}}</p>
+        </div>
+       
+        <div class="card-body">
+          <a href="#" class="btn btn-info" routerLink="questions/{{question.id}}">Go details</a>
+        </div>
+      </div>
     
   </div>
+
 </header>
