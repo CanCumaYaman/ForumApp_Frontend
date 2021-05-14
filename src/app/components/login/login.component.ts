@@ -46,7 +46,7 @@ if(this.loginForm.valid){
     },100)
   },
   responseError=>{
-    this.toastrService.error(responseError.error,"Username or password wrong");
+    this.toastrService.error(responseError.error);
   }
   )
 } else{

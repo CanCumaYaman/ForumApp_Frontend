@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,FormControl,Validators,FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommentDto } from 'src/app/models/commentDto';
 import { Question } from 'src/app/models/question';
 import { QuestionComment } from 'src/app/models/questionComment';
 import { UserFullName } from 'src/app/models/userFullName';
+import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/localStorage';
 import { QuestionCommentService } from 'src/app/services/question-comment.service';
 import { QuestionService } from 'src/app/services/question.service';
@@ -26,11 +27,11 @@ export class QuestionDetailComponent implements OnInit {
   commentingUserId:number;
   questionId:number;
   commentForm:FormGroup;
-  constructor(private questionService:QuestionService,private questionCommentService:QuestionCommentService, private localStorageService:LocalStorageService, private userService:UserService,private formBuilder:FormBuilder,private activatedRoute:ActivatedRoute,private toastrService:ToastrService) { }
+  constructor(private questionService:QuestionService, private questionCommentService:QuestionCommentService,private router:Router, private localStorageService:LocalStorageService,private authService:AuthService, private userService:UserService,private formBuilder:FormBuilder,private activatedRoute:ActivatedRoute,private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.createCommentAddForm();
-    this.getCommentingUserId();
+    
     
     this.activatedRoute.params.subscribe(params=>{
   if(params["questionId"]){
@@ -72,28 +73,40 @@ this.userDto=response.data;
 
   }
   getCommentingUserId(){
-    this.email=JSON.stringify(this.localStorageService.getItem("email")).replace(/^"|"$/g, '');
-    this.userService.getUserId(this.email).subscribe(response=>{
-    this.commentingUserId=response;
+    return new Promise(resolve=>{
+      this.email=JSON.stringify(this.localStorageService.getItem("email")).replace(/^"|"$/g, '');
+      this.userService.getUserId(this.email).subscribe(response=>{
+      this.commentingUserId=response;
+      resolve(true);
+    }) 
     })
   }
 
-  addComment(){
+   async addComment() {
+    if(!this.authService.isAuthenticated()){
+      this.toastrService.info("You must be login for add comment");
+      this.router.navigate(['/login']);
+      return;
+    }
+   await  this.getCommentingUserId();
     if(this.commentForm.valid){
+      
       const commentModel:QuestionComment={
         comment:this.commentForm.controls['comment'].value,
         userId:this.commentingUserId,
         questionId:this.questionId
       }
-      this.questionCommentService.addQuestionComment(commentModel).subscribe(response=>{
-        this.toastrService.success("Your comment added successfully",response.message);
+
+     this.questionCommentService.addQuestionComment(commentModel).subscribe(response=>{
+        
+         window.location.reload();
       },
       responseError=>{
         this.toastrService.error("Error occured while adding your comment",responseError.error);
       }
       )
     } else{
-      this.toastrService.error("Please enter valid comment");
+     this.toastrService.error("Please enter valid comment");
     }
   }
 

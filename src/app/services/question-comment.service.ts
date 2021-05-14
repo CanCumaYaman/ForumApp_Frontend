@@ -14,7 +14,7 @@ export class QuestionCommentService {
   apiUrl="https://localhost:44312/api/QuestionComments/";
   constructor(private httpClient:HttpClient) { }
 
-  addQuestionComment(comment:QuestionComment){
+ addQuestionComment(comment:QuestionComment){
     return this.httpClient.post<SingleResponseModel<QuestionComment>>(this.apiUrl+"add",comment);
   }
   getQuestionCommentsByQuestionId(id:number){

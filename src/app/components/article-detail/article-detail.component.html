@@ -34,7 +34,7 @@
 <div class="comments">
     <div *ngFor="let comment of comments" class="row">
         <div class="col-md-7">
-            <p>{{comment.comment}}</p>
+            <p style="font-family: 'Poppins', sans-serif;"><i class="fas fa-comment"></i> &nbsp; {{comment.comment}}</p>
             <span class="d-flex justify-content-end">{{comment.commentingFirstName + " " +  comment.commentingLastName }}</span>
             <hr>
         </div>

@@ -18,8 +18,8 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"askQuestion",component:AskQuestionComponent,canActivate:[LoginGuard]},
-  {path:"addArticle",component:ArticleAddComponent,canActivate:[LoginGuard]},
-  {path:"questions/:questionId",component:QuestionDetailComponent,canActivate:[LoginGuard]},
+  {path:"articles/addArticle",component:ArticleAddComponent,canActivate:[LoginGuard]},
+  {path:"questions/:questionId",component:QuestionDetailComponent},
   {path:"articles",component:ArticleComponent},
   {path:"articles/:articlesId",component:ArticleDetailComponent,canActivate:[LoginGuard]},
 ];
