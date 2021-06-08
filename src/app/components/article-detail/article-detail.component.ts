@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder,FormControl,FormGroup,Validators } from '@angular/forms';
 import { Article } from 'src/app/models/article';
@@ -10,6 +10,7 @@ import { ArticleService } from 'src/app/services/article.service';
 import { LocalStorageService } from 'src/app/services/localStorage';
 import { UserService } from 'src/app/services/user.service';
 import { ArticleComment } from 'src/app/models/articleComment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-article-detail',
@@ -20,16 +21,16 @@ export class ArticleDetailComponent implements OnInit {
 
   commentForm:FormGroup;
   article:Article;
-  userDto:UserFullName;
+  userDto:string;
   articleId:number;
   comments:CommentDto[];
   commentingUserId:number;
   email:string;
-  constructor(private activatedRoute:ActivatedRoute,private articleService:ArticleService,private articleCommentService:ArticleCommentService, private userService:UserService,private localStorageService:LocalStorageService, private toastrService:ToastrService,private formBuilder:FormBuilder) { }
+  constructor(private activatedRoute:ActivatedRoute,private authService:AuthService,private router:Router, private articleService:ArticleService,private articleCommentService:ArticleCommentService, private userService:UserService,private localStorageService:LocalStorageService, private toastrService:ToastrService,private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
    this.createCommentAddForm();
-   this.getCommentingUserId();
+  
 
    this.activatedRoute.params.subscribe(params=>{
      if(params['articlesId']){
@@ -52,7 +53,7 @@ export class ArticleDetailComponent implements OnInit {
 
   getUserFullName(id:number){
     this.userService.getUserFullNameById(id).subscribe(response=>{
-      this.userDto=response.data;
+      this.userDto=response.message;
     })
   }
   
@@ -74,13 +75,23 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   getCommentingUserId(){
+    return new Promise(resolve=>{
     this.email=JSON.stringify(this.localStorageService.getItem("email")).replace(/^"|"$/g, '');
     this.userService.getUserId(this.email).subscribe(response=>{
       this.commentingUserId=response;
     })
+    resolve(true);
+  }) 
   }
+  
 
-  addComment(){
+  async addComment(){
+    if(!this.authService.isAuthenticated()){
+      this.toastrService.info("You must be login for add comment");
+      this.router.navigate(['/login']);
+      return;
+    }
+   await  this.getCommentingUserId();
     if(this.commentForm.valid){
       const articleModel:ArticleComment={
          comment:this.commentForm.controls['comment'].value,

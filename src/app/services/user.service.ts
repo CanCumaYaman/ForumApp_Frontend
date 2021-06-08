@@ -14,12 +14,12 @@ export class UserService {
   constructor(private httpClient:HttpClient) { }
 
   getUserFullNameByMail(email:string){
-   return this.httpClient.get<SingleResponseModel<UserFullName>>(this.apiUrl+"getfullnamebymail?mail="+email);
+   return this.httpClient.get<SingleResponseModel<string>>(this.apiUrl+"getfullnamebymail?mail="+email);
   }
   getUserId(email:string){
     return this.httpClient.get<number>(this.apiUrl+"getuserid?mail="+email);
    }
    getUserFullNameById(id:number){
-     return this.httpClient.get<SingleResponseModel<UserFullName>>(this.apiUrl+"getfullnamebyid?id="+id);
+     return this.httpClient.get<SingleResponseModel<string>>(this.apiUrl+"getfullnamebyid?id="+id);
    }
 }

@@ -20,7 +20,7 @@ import { UserService } from 'src/app/services/user.service';
 export class QuestionDetailComponent implements OnInit {
 
   question:Question;
-  userDto:UserFullName;
+  userDto:string;
   dataLoaded:false;
   email:string;
   comments:CommentDto[];
@@ -54,7 +54,7 @@ this.getQuestionComments();
   }
   getUserFullName(id:number){
    this.userService.getUserFullNameById(id).subscribe(response=>{
-this.userDto=response.data;
+  this.userDto=response.message;
    })
   }
   getQuestionComments(){

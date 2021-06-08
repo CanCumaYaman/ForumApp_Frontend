@@ -12,7 +12,7 @@
     </div>
     
     <div class="row ">
-        <div class="col-md-7 text-justify">
+        <div class="col-md-7 text-justify" style="font-family: 'Roboto', sans-serif;">
             {{article.body}}
         </div>
         
@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-md-7">
             
-            <span class="d-flex justify-content-end">{{userDto.firstName + " " + userDto.lastName}}</span>
+            <span class="d-flex justify-content-end">{{userDto}}</span>
         </div>
     </div>
 </div>
@@ -35,7 +35,8 @@
     <div *ngFor="let comment of comments" class="row">
         <div class="col-md-7">
             <p style="font-family: 'Poppins', sans-serif;"><i class="fas fa-comment"></i> &nbsp; {{comment.comment}}</p>
-            <span class="d-flex justify-content-end">{{comment.commentingFirstName + " " +  comment.commentingLastName }}</span>
+            <span class="d-flex justify-content-end"><i class="fas fa-calendar-alt mt-1"></i>&nbsp; {{comment.createdDate | date }}</span>
+            <span class="d-flex justify-content-end"><i class="fas fa-user-alt mt-1"></i>&nbsp;{{comment.commentingFirstName + " " +  comment.commentingLastName }}</span>
             <hr>
         </div>
         

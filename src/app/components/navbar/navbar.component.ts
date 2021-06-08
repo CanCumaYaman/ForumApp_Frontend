@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class NavbarComponent implements OnInit {
 
   email:string;
-  userFullName:UserFullName;
+  userFullName:string;
   dataLoaded:Boolean=false;
   constructor(private authService:AuthService,private localStorage:LocalStorageService,private userService:UserService,private toastrService:ToastrService) {
 if(this.isLoggedIn()){
@@ -32,7 +32,7 @@ logOut(){
 }
 getUserInfo(){
  this.userService.getUserFullNameByMail(this.email).subscribe(response=>{
-this.userFullName=response.data;
+this.userFullName=response.message;
  });
 }
 }

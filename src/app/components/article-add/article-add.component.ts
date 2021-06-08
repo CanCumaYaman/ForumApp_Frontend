@@ -19,7 +19,8 @@ export class ArticleAddComponent implements OnInit {
   constructor(private articleService:ArticleService,private userService:UserService,private router:Router, private localStorageService:LocalStorageService, private formBuilder:FormBuilder,private toastrService:ToastrService) { }
 
   ngOnInit(): void {
-    
+    this.createArticleAddForm();
+    this.getUserId();
   }
 
   createArticleAddForm(){

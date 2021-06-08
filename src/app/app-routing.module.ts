@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:"articles/addArticle",component:ArticleAddComponent,canActivate:[LoginGuard]},
   {path:"questions/:questionId",component:QuestionDetailComponent},
   {path:"articles",component:ArticleComponent},
-  {path:"articles/:articlesId",component:ArticleDetailComponent,canActivate:[LoginGuard]},
+  {path:"articles/:articlesId",component:ArticleDetailComponent},
 ];
 
 @NgModule({

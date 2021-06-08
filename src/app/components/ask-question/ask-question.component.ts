@@ -59,6 +59,7 @@ export class AskQuestionComponent implements OnInit {
       },
       responseError=>{
         this.toastrService.error(responseError.error);
+        console.log(responseError);
       }
       )
     }else{

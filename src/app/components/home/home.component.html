@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-end mt-3">
+<div class="d-flex justify-content-end">
   <button class="btn btn-info text-right" routerLink="askQuestion">Ask Question</button>
 </div>
 
@@ -15,7 +15,7 @@ You searched {{filterText}}
   <div class="row">
     
       <div  *ngFor="let question of questions | filterPipe:filterText" class="card col-md-4" style="width: 18rem;border:0;">
-        <img class="card-img-top" src="https://wallpaperaccess.com/full/1682869.png" alt="Card image cap">
+        <img class="card-img-top" src="../../../assets/question.png" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{question.topic}}</h5>
           <p class="card-text">{{question.title}}</p>
