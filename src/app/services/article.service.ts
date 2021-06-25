@@ -19,6 +19,11 @@ export class ArticleService {
   getAll(){
     return this.httpClient.get<ListResponseModel<Article>>(this.apiUrl+"getall");
   }
+  getRelatedArticle(articleTopic:string){
+    return this.httpClient.get<ListResponseModel<Article>>(this.apiUrl+"getrelated?articleTopic="+articleTopic);
+  }
+
+  
   deleteQuestion(article:Article){
     return this.httpClient.post<ResponseModel>(this.apiUrl+"delete",article);
   }

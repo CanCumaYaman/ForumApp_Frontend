@@ -21,6 +21,7 @@ export class ArticleDetailComponent implements OnInit {
 
   commentForm:FormGroup;
   article:Article;
+  relatedArticles:Article[];
   userDto:string;
   articleId:number;
   comments:CommentDto[];
@@ -28,9 +29,9 @@ export class ArticleDetailComponent implements OnInit {
   email:string;
   constructor(private activatedRoute:ActivatedRoute,private authService:AuthService,private router:Router, private articleService:ArticleService,private articleCommentService:ArticleCommentService, private userService:UserService,private localStorageService:LocalStorageService, private toastrService:ToastrService,private formBuilder:FormBuilder) { }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
    this.createCommentAddForm();
-  
+   
 
    this.activatedRoute.params.subscribe(params=>{
      if(params['articlesId']){
@@ -39,15 +40,27 @@ export class ArticleDetailComponent implements OnInit {
      }
    });
    this.getArticlesComment();
+  
   }
 
   getArticleById(id:number){
     this.articleService.getArticleById(id).subscribe(response=>{
       this.article=response.data;
       this.getUserFullName(this.article.userId);
+      this.getRelatedArticles();
     },
     responseError=>{
       this.toastrService.error(responseError.error);
+    })
+    
+  }
+
+  getRelatedArticles(){
+    this.articleService.getRelatedArticle(this.article.topic).subscribe(response=>{
+    this.relatedArticles=response.data;
+    },
+    responseError=>{
+      this.toastrService.error("Something went wrong while related articles loading");
     })
   }
 
@@ -62,7 +75,7 @@ export class ArticleDetailComponent implements OnInit {
       this.comments=response.data;
     },
     responseError=>{
-      this.toastrService.error("Something went wrong while comments loading");
+      //this.toastrService.error("Something went wrong while comments loading");
     }
     )
   }
