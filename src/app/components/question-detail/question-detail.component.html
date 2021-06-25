@@ -1,60 +1,79 @@
 
 <div class="container">
-    <div class="question-detail mb-5">
+    <div class="question-detail row mb-5">
+        <div class="col-md-7">
+
+        
         <div class="row title">
         <h3 class="title mt-3 ml-3">{{question.title}}</h3>
     </div>
     <div class="row ">
-        <div class="col-md-7 ml-0 text-justify">
+        <div class="col-md-12 ml-0 text-justify">
             <hr width="100%" color="#202126">
         </div>
         
     </div>
     
     <div class="row ">
-        <div class="col-md-7 text-justify">
+        <div class="col-md-12 text-justify">
             {{question.body}}
         </div>
         
     </div>
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-12">
            <h4 class="mt-3 mb-3"><span class="badge bg-success" style="width: auto;">{{question.topic}}</span></h4> 
         </div>
         
     </div>
-    <div class="row">
-        <div class="col-md-7">
+    <div class="row" style="margin-bottom: 200px;">
+        <div class="col-md-12">
             <span class="d-flex justify-content-end">{{ question.createdDate | date }}</span>
             <span class="d-flex justify-content-end">{{userDto}}</span>
         </div>
     </div>
-</div>
-<div class="comments">
-    <div *ngFor="let comment of comments" class="row">
-        <div class="col-md-7">
-            <p class="text-justify" style="font-family: 'Poppins', sans-serif;"><i class="fas fa-comment"></i> &nbsp; {{comment.comment}}</p>
-            <span class="d-flex justify-content-end text-left"><i class="fas fa-calendar-alt mt-1"></i>&nbsp; {{comment.createdDate | date }}</span>
-            <span class="d-flex justify-content-end text-left"><i class="fas fa-user-alt mt-1"></i>&nbsp;{{comment.commentingFirstName + " " +  comment.commentingLastName }}</span>
-            <hr>
+    <div class="comments">
+        <div *ngFor="let comment of comments">
+          
+                <p class="text-justify" style="font-family: 'Poppins', sans-serif;"><i class="fas fa-comment"></i> &nbsp; {{comment.comment}}</p>
+                <span class="d-flex justify-content-end text-left"><i class="fas fa-calendar-alt mt-1"></i>&nbsp; {{comment.createdDate | date }}</span>
+                <span class="d-flex justify-content-end text-left"><i class="fas fa-user-alt mt-1"></i>&nbsp;{{comment.commentingFirstName + " " +  comment.commentingLastName }}</span>
+                <hr>
+         
+            
         </div>
         
     </div>
+    <div class="newComment mt-5">
+        <div class="row">
+            <div class="col-md-12">
+            <form [formGroup]="commentForm">
+                <div class="form-group green-border-focus">
+        
+                    <textarea class="form-control" formControlName="comment"  rows="3"></textarea>
+                  </div>
+                <input type="submit" class="btn btn-info w-25 mt-3 mb-3" (click)="addComment()" value="Add">
+            </form>
+        </div>
+        </div>
     
+    </div>
 </div>
-<div class="newComment mt-5">
-    <div class="row">
-        <div class="col-md-7">
-        <form [formGroup]="commentForm">
-            <div class="form-group green-border-focus">
-    
-                <textarea class="form-control" formControlName="comment"  rows="3"></textarea>
-              </div>
-            <input type="submit" class="btn btn-info w-25 mt-3 mb-3" (click)="addComment()" value="Add">
-        </form>
-    </div>
-    </div>
 
+<div class="col-md-3 mt-5" style="margin-left: 100px;">
+
+    <div *ngFor="let question of relatedQuestions | slice:-2" class="card" style="width: 18rem;border: 0;">
+        <img class="card-img-top" src="../../../assets/question.png" style="object-fit:fill;" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{question.topic}}</h5>
+          <p class="card-text">{{question.title}}</p>
+        </div>
+       
+        <div class="card-body">
+          <a href="#" class="btn btn-primary" routerLink="/questions/{{question.id}}">Go details</a>
+        </div>
+      </div>
+</div>
 </div>
 
 </div>

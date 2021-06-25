@@ -20,6 +20,7 @@ import { UserService } from 'src/app/services/user.service';
 export class QuestionDetailComponent implements OnInit {
 
   question:Question;
+  relatedQuestions:Question[];
   userDto:string;
   dataLoaded:false;
   email:string;
@@ -46,12 +47,23 @@ this.getQuestionComments();
     this.questionService.getQuestionById(id).subscribe(response=>{
       this.question=response.data;
       this.getUserFullName(this.question.userId);
+      this.getRelatedQuestions();
     },
     responseError=>{
       this.toastrService.error(responseError.error);
     }
     )
   }
+  
+  getRelatedQuestions(){
+    this.questionService.getRelatedQuestions(this.question.topic).subscribe(response=>{
+      this.relatedQuestions=response.data;
+      },
+      responseError=>{
+        this.toastrService.error("Something went wrong while related questions loading");
+      })
+  }
+
   getUserFullName(id:number){
    this.userService.getUserFullNameById(id).subscribe(response=>{
   this.userDto=response.message;

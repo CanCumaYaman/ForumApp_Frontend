@@ -19,6 +19,10 @@ export class QuestionService {
   getAll(){
     return this.httpClient.get<ListResponseModel<Question>>(this.apiUrl+"getall");
   }
+  getRelatedQuestions(questionTopic:string){
+    return this.httpClient.get<ListResponseModel<Question>>(this.apiUrl+"getrelated?topic="+questionTopic);
+  }
+
   deleteQuestion(question:Question){
     return this.httpClient.post<ResponseModel>(this.apiUrl+"delete",question);
   }
